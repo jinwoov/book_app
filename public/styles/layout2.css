@@ -1,0 +1,28 @@
+h1 {
+    margin: 0px auto;
+    padding-left: 20px;
+    height: 100px;
+    line-height: 100px;
+    background-color: black;
+    color: white;
+    font-size: 50px;
+}
+
+h2 {
+    margin: 0px auto;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    background-color: #4a4a4a;
+    color: white;
+}
+
+main {
+    background-color: #d8d8d8;
+    width: 100%;
+    text-align: center;
+}
+
+img {
+    margin: 20px;
+}

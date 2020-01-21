@@ -1,0 +1,65 @@
+form {
+    text-align: center;
+    margin: 0 auto;
+    height: 800px;
+}
+
+h1 {
+    margin: 0px auto;
+    text-align: center;
+    height: 100px;
+    line-height: 100px;
+    background-color: black;
+    color: white;
+}
+
+h2 {
+    margin: 0px auto;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    background-color: #4a4a4a;
+    color: white;
+}
+
+main {
+    background-color: #9b9b9b;
+}
+
+input {
+    width: 80%;
+    height: 40px;
+    margin-top: 5%;
+}
+
+fieldset {
+    background-color: #d8d8d8;
+    width: 80%;
+    height: 40px;
+    margin: 20px auto;
+    text-align: none;
+}
+
+label {
+    display: flex;
+}
+
+fieldset input {
+    width: 20px;
+    margin-top: 0;
+}
+
+button {
+    width: 80%;
+    height: 40px;
+    background-color: black;
+    color: white;
+}
+
+
+p {
+    width: 20%;
+    height: 100%;
+    line-height: 40px;
+}
+

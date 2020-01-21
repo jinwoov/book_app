@@ -6,16 +6,27 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Book Results</title>
   <link rel="stylesheet" href="/styles/reset.css">
+  <link rel="stylesheet" href="/styles/base.css">
+  <link rel="stylesheet" href="/styles/layout2.css">
+  <link rel="stylesheet" href="/styles/module.css">
 </head>
 <body>
-  <ul>
-    <% bookResultsData.forEach(value => { %>
-      <img src="<%= value.image %>" alt="<%= value.title %>">
-      <li><%= value.title %></li>
-      <li><%= value.author %></li>
-      <li><%= value.summary %></li>
-  
-    <% })%>
-  </ul>
+  <header>
+    <nav>
+      <h1>Best Books!</h1>
+    </nav>
+  </header>
+  <main>
+    <h2>Search by Title or Author</h2>
+    <ul>
+      <% bookResultsData.forEach(value => { %>
+          <img src="<%= value.image %>" alt="<%= value.title %>">
+        <li id='title'><%= value.title %></li>
+        <li id='author'><%= value.author %></li>
+        <li id='summary'><%= value.summary %></li>
+    
+      <% })%>
+    </ul>
+  </main>
 </body>
 </html>
