@@ -2,6 +2,7 @@ form {
     text-align: center;
     margin: 0 auto;
     height: 800px;
+    margin-bottom: 40px;
 }
 
 h1 {
@@ -37,7 +38,6 @@ fieldset {
     width: 80%;
     height: 40px;
     margin: 20px auto;
-    text-align: none;
 }
 
 label {
