@@ -16,12 +16,11 @@ app.use(express.urlencoded({extended:true}));
 //   response.send('hello word');
 // });
 
-app.use('*', developerErrorHandler);
 app.use(express.static('./public'));
 app.get('/hello', search);
 app.get('/searches/new', bookSearch);
-
 app.post('/searches/new', bookResults);
+app.use('*', developerErrorHandler);
 
 function search(request, response) {
   response.status(200).render('./pages/index');
