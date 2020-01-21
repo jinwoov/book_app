@@ -16,7 +16,7 @@ app.use(express.urlencoded({extended:true}));
 //   response.send('hello word');
 // });
 
-
+app.use('*', developerErrorHandler);
 app.use(express.static('./public'));
 app.get('/hello', search);
 app.get('/searches/new', bookSearch);
@@ -47,7 +47,10 @@ function bookResults(request, response) {
         return new Book(data.volumeInfo);
       });
       response.status(200).render('./pages/results', {bookResultsData: bookList});
-    });
+    })
+    .catch(() => {
+      errorHandler('Sorry, its invalid search',response)
+    })
 }
 
 function Book(bookData){
@@ -61,10 +64,15 @@ function Book(bookData){
   }
   this.summary = bookData.description || 'no summary available';
   this.image = bookData.imageLinks.thumbnail || placeImage;
-
 }
 
+function errorHandler(string,response) {
+  response.status(500).send(string)
+}
 
+function developerErrorHandler(request,response) {
+  response.status(404).send ('sorry this request is not available yet')
+}
 
 
 
