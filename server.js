@@ -57,7 +57,7 @@ function Book(bookData){
   this.title = bookData.title || 'no title available';
 
   if(bookData.authors > 1) {
-    this.author = bookData.authors[0];
+    this.author = bookData.authors.join(', ');
   } else {
     this.author = bookData.authors || 'no author available';
   }

@@ -6,6 +6,7 @@ h1 {
     background-color: black;
     color: white;
     font-size: 50px;
+    font-family: 'Bangers', cursive;;
 }
 
 h2 {
@@ -15,14 +16,24 @@ h2 {
     line-height: 50px;
     background-color: #4a4a4a;
     color: white;
+    font-family: 'Bangers', cursive;
 }
 
 main {
     background-color: #d8d8d8;
     width: 100%;
     text-align: center;
+    padding-bottom: 40px;
 }
 
 img {
     margin: 20px;
+}
+
+img:hover {
+    width: 35%
+}
+
+li {
+    font-family: monospace,sans-serif;
 }
