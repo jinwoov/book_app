@@ -12,6 +12,7 @@ h1 {
     line-height: 100px;
     background-color: black;
     color: white;
+    font-family: 'Bangers', cursive;
 }
 
 h2 {
@@ -21,6 +22,7 @@ h2 {
     line-height: 50px;
     background-color: #4a4a4a;
     color: white;
+    font-family: 'Bangers', cursive;;
 }
 
 main {
@@ -31,6 +33,8 @@ input {
     width: 80%;
     height: 40px;
     margin-top: 5%;
+    font-size: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 fieldset {
@@ -54,6 +58,7 @@ button {
     height: 40px;
     background-color: black;
     color: white;
+    font-size: 15px;
 }
 
 

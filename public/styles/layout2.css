@@ -30,6 +30,10 @@ img {
     margin: 20px;
 }
 
+img:hover {
+    width: 35%
+}
+
 li {
     font-family: monospace,sans-serif;
 }
