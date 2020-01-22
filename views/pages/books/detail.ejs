@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../layout/head') %>
+</head>
+<body>
+    <header>
+        <%- include('../layout/header') %>
+    </header>
+    <main>
+        <section class="book container">
+          <ul id="bookapp-list">
+            <li class="bookapp-item" data-id="<%= oneBook.id %>">
+              <h4>Book: <%= oneBook.title %></h4>
+              <p>Author: <%= oneBook.author %></p>
+              <p>ISBN: <%= oneBook.isbn %></p>
+              <img src="<%= oneBook.image_url %>" alt="<%= oneBook.title %>" \>
+              <p>Summary: <%= oneBook.descriptions %></p>
+              <p><%= oneBook.bookshelf %></p>
+            </li>
+          </ul>
+        </section>
+      </main>
+</body>
+</html>
