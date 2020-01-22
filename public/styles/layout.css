@@ -7,11 +7,12 @@ form {
 
 h1 {
     margin: 0px auto;
-    text-align: center;
+    padding-left: 20px;
     height: 100px;
     line-height: 100px;
     background-color: black;
     color: white;
+    font-size: 50px;
     font-family: 'Bangers', cursive;
 }
 
