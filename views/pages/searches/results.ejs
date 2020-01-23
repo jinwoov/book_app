@@ -10,15 +10,19 @@
   </header>
   <main>
     <%- include('../layout/h2') %>
-
-    <ul>
-      <% bookResultsData.forEach(value => { %>
-        <li data-id="<%= value.id %>">
-        <img src="<%= value.image %>" alt="<%= value.title %>" name="search">
-        <li id='title' name="search" value="title"><%= value.title %></li>
-        <li id='author' name="search" value="author"><%= value.author %></li>
-        <li id='summary' name="search" value="summary"><%= value.summary %></li>
-        <a href="/books/<%=value.id%>" id="button">Add this book</a>
+<ul>
+    <% bookResultsData.forEach(value => { %>
+      <li data-book-id="<%= value.isbn %>">
+        <%- include('../books/detail', {oneBook: value})%>
+      <form action="/books"  method="post">
+        <input type='hidden' name="image" value="<%= value.image %>" />
+        <input type='hidden' id='title' name="title" value="<%= value.title %>" required />
+        <input type='hidden' id='author' name="author" value="<%= value.author %>" required />
+        <input type='hidden' id='isbn' name="isbn" value="<%= value.isbn %>" />
+        <input type='hidden' id='summary' name="summary" value="<%= value.summary %>" />
+        <input type='hidden' id='bookshelf' name="bookshelf" value="<%= value.bookshelf %>" />
+        <button id='button' type='submit'>Add this book</button>
+    </form>
       </li>
       <% })%>
     </ul>
