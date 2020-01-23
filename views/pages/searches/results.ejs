@@ -13,13 +13,13 @@
 
     <ul>
       <% bookResultsData.forEach(value => { %>
-        
+        <li data-id="<%= value.id %>">
         <img src="<%= value.image %>" alt="<%= value.title %>" name="search">
         <li id='title' name="search" value="title"><%= value.title %></li>
         <li id='author' name="search" value="author"><%= value.author %></li>
         <li id='summary' name="search" value="summary"><%= value.summary %></li>
-        <a href="/books/<%=value.id%>">Add this book</a>
- 
+        <a href="/books/<%=value.id%>" id="button">Add this book</a>
+      </li>
       <% })%>
     </ul>
   </main>

@@ -6,6 +6,6 @@ CREATE TABLE bookApp (
     title VARCHAR(255),
     isbn VARCHAR(255),
     image_url VARCHAR(255),
-    descriptions VARCHAR(255),
+    descriptions TEXT,
     bookshelf VARCHAR(255)
 );
