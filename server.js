@@ -24,7 +24,7 @@ app.get('/hello', search);
 app.get('/searches/new', bookSearch);
 app.post('/searches/new', bookResults);
 // app.get('/books', detailBook)
-app.post('/books', addFavBook)
+// app.post('/books', addFavBook)
 app.get('/books/:book_id', getOneBook);
 app.post('/', getBooks);
 
@@ -55,38 +55,51 @@ function bookResults(request, response) {
   superagent.get(url)
     .then(results => {
       let result = results.body.items;
-      let SQL = `INSERT INTO bookApp (author, title, isbn, image_url, descriptions, bookshelf) VALUES ($1, $2, $3, $4, $5, $6);`;
-      let bookList = result.map(data => {
-        let bookLists = new Book(data.volumeInfo);
-        let safeValue = [bookLists.author, bookLists.title, bookLists.isbn, bookLists.image, bookLists.summary, bookLists.bookshelf]
-       client.query(SQL, safeValue)
-        return bookLists
-      });
-      // console.log(bookList)
-      response.status(200).render('./pages/searches/results', {bookResultsData: bookList});
-
-    })
+      var counter = 0;
+      let bookLists= result.map(data => {
+        let bookList = new Book(data.volumeInfo);
+        addFavBook(bookList)
+          .then (result => {
+            bookList.id = result;
+            return bookList.id
+          })
+        // console.log(bookList.id)
+        return bookList
+      })
+      response.status(200).render('./pages/searches/results', {bookResultsData: bookLists})})
     .catch(() => {
-      errorHandler('Sorry, its invalid search',response)
+      errorHandler('Sorry, its invalid search',request ,response)
     })
-}
-
-function getOneBook(request,response) {
-  let SQL = 'SELECT * FROM bookApp where id=$1;';
-  let safeValue = [request.params.book_id]
-
-  return client.query(SQL, safeValue)
-    .then(result => {
-      console.log(result)
-      return response.render('pages/books/detail', { oneBook: result.row[0]});
-    }) .catch(err => errorHandler(err, response))
 }
 
 ////adding book
 
-function addFavBook(request, response) {
-  console.log(request)
+function addFavBook(bookLists) {
+  let SQL = `INSERT INTO bookApp (author, title, isbn, image_url, descriptions, bookshelf) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;`;
+  // console.log('this is bookLists that is passsed on', bookLists)
+  let safeValue = [bookLists.author, bookLists.title, bookLists.isbn, bookLists.image, bookLists.summary, bookLists.bookshelf]
+  return client.query(SQL, safeValue)
+    .then(result => {
+      let bookID = result.rows[0].id
+      return bookID
+    })
 }
+
+
+function getOneBook(request,response) {
+  console.log(request)
+  let SQL = 'SELECT * FROM bookApp where id=$1;';
+  let values = [request.params.book_id];
+  client.query(SQL, values)
+    .then(result => {
+      // console.log(result)
+      return response.render('pages/books/detail', { oneBook: result.rows[0]});
+    }).catch(() => {
+      errorHandler('Sorry, its invalid search',request ,response)
+    })
+}
+
+
 
 function Book(bookData){
   let placeImage = 'https://via.placeholder.com/200';
@@ -95,7 +108,7 @@ function Book(bookData){
   if(bookData.authors > 1) {
     this.author = bookData.authors.join(', ');
   } else {
-    this.author = bookData.authors || 'no author available';
+    this.author = bookData.authors[0] || 'no author available';
   }
   this.summary = bookData.description || 'no summary available';
   this.image = bookData.imageLinks.thumbnail || placeImage;
@@ -107,8 +120,9 @@ function Book(bookData){
   }
 }
 
-function errorHandler(string,response) {
-  response.status(500).send(string)
+function errorHandler(err, res) {
+  console.error(err);
+  if (res) res.status(500).send('Sorry, something went wrong');
 }
 
 function developerErrorHandler(request,response) {
@@ -129,6 +143,7 @@ function developerErrorHandler(request,response) {
 
 
 app.use('*', developerErrorHandler);
+app.get((error, req, res) => errorHandler(error, res)); // handle errors
 
 app.listen(PORT, () => console.log(`we are listening in ${PORT}`));
 
