@@ -8,6 +8,7 @@ require('dotenv').config();
 const PORT = process.env.PORT || 3001;
 const pg = require('pg');
 
+
 app.set('view engine', 'ejs');
 
 // body parser
@@ -20,28 +21,26 @@ client.connect();
 client.on('error', err => console.error('error'));
 
 app.use(express.static('./public'));
-app.get('/hello', search);
 app.get('/searches/new', bookSearch);
 app.post('/searches/new', bookResults);
-// app.get('/books', detailBook)
-// app.post('/books', addFavBook)
+app.post('/books', addFavBook);
 app.get('/books/:book_id', getOneBook);
-app.post('/', getBooks);
+// app.post('/', getBooks);
 
-function search(request, response) {
-  response.status(200).render('./pages/index');
-}
+// function search(request, response) {
+//   response.status(200).render('./pages/index');
+// }
 
 function bookSearch(request, response) {
   response.status(200).render('./pages/searches/new');
 }
 
-function getBooks(request,response) {
-  let SQL = 'SELECT * FROM bookApp;';
-  return client.query(SQL)
-    .then(results => response.render('./pages/index', { result: results.rows }))
-    .catch(err => errorHandler(err, response))
-}
+// function getBooks(request,response) {
+//   let SQL = 'SELECT * FROM bookApp;';
+//   return client.query(SQL)
+//     .then(results => response.render('./pages/index', { result: results.rows }))
+//     .catch(err => errorHandler(err, response))
+// }
 
 function bookResults(request, response) {
   let bookResult = request.body.search;
@@ -55,18 +54,12 @@ function bookResults(request, response) {
   superagent.get(url)
     .then(results => {
       let result = results.body.items;
-      var counter = 0;
       let bookLists= result.map(data => {
-        let bookList = new Book(data.volumeInfo);
-        addFavBook(bookList)
-          .then (result => {
-            bookList.id = result;
-            return bookList.id
-          })
-        // console.log(bookList.id)
+        let bookList = new Book(data.volumeInfo)
         return bookList
       })
-      response.status(200).render('./pages/searches/results', {bookResultsData: bookLists})})
+      response.status(200).render('./pages/searches/results', {bookResultsData: bookLists})
+    })
     .catch(() => {
       errorHandler('Sorry, its invalid search',request ,response)
     })
@@ -74,26 +67,25 @@ function bookResults(request, response) {
 
 ////adding book
 
-function addFavBook(bookLists) {
+function addFavBook(request, response) {
+
+  let {image, title, author, isbn, summary, bookshelf} = request.body;
+
   let SQL = `INSERT INTO bookApp (author, title, isbn, image_url, descriptions, bookshelf) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;`;
-  // console.log('this is bookLists that is passsed on', bookLists)
-  let safeValue = [bookLists.author, bookLists.title, bookLists.isbn, bookLists.image, bookLists.summary, bookLists.bookshelf]
+  let safeValue = [author, title, isbn, image, summary, bookshelf];
   return client.query(SQL, safeValue)
     .then(result => {
-      let bookID = result.rows[0].id
-      return bookID
-    })
+      response.redirect(`/books/${result.rows[0].id}`)});
 }
 
 
 function getOneBook(request,response) {
-  console.log(request)
   let SQL = 'SELECT * FROM bookApp where id=$1;';
   let values = [request.params.book_id];
   client.query(SQL, values)
-    .then(result => {
-      // console.log(result)
-      return response.render('pages/books/detail', { oneBook: result.rows[0]});
+     .then(result => {
+      console.log(result)
+      response.render('./pages/books/show', { oneBook: result.rows[0]});
     }).catch(() => {
       errorHandler('Sorry, its invalid search',request ,response)
     })
@@ -104,7 +96,6 @@ function getOneBook(request,response) {
 function Book(bookData){
   let placeImage = 'https://via.placeholder.com/200';
   this.title = bookData.title || 'no title available';
-
   if(bookData.authors > 1) {
     this.author = bookData.authors.join(', ');
   } else {
@@ -120,9 +111,8 @@ function Book(bookData){
   }
 }
 
-function errorHandler(err, res) {
-  console.error(err);
-  if (res) res.status(500).send('Sorry, something went wrong');
+function errorHandler(err, request, response) {
+  response.status(500).send('Sorry, something went wrong');
 }
 
 function developerErrorHandler(request,response) {
