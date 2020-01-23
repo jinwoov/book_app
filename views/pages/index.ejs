@@ -2,13 +2,24 @@
 <html lang="en">
 <head>
   <%- include('./layout/head') %>
+  <link rel="stylesheet" href="/styles/layout.css">
 </head>
 <body>
   <header>
     <%- include('./layout/header') %>
   </header>
-
-  <h1>Hello World</h1>
-  
+  <main>
+    <section>
+      <ul>
+        <li><%= result.length %> books</li>
+        <% result.forEach(books => { %>
+          <li class="books-item" data-id="<%= books.id %>">
+            <h4>books: <%= books.title %></h4>
+            <a href="/books/<%= books.id%>">View Details</a>
+          </li>
+        <% }) %>
+      </ul>
+  </section>
+  </main>  
 </body>
 </html>
