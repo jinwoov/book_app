@@ -3,6 +3,7 @@ Full Stack application that helps with user's book search.
 
 # How to run this website
 Deployed Website: https://bd-jk-booklists.herokuapp.com/  
+Trello board: https://trello.com/b/888jV2QG/updated-book-shelves   
 Otherwise, run terminal and open live-server from head repo or open deployed website.
 
 # Created by  
