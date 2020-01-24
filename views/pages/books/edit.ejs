@@ -11,3 +11,29 @@
   <input type="text" name="bookshelf" value="<%- book.bookshelf %>" placeholder="bookshelf">
   <button type="submit"><%- 'update' === formAction ? "Update This book" : "Add This book" %></button>
 </form>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+  let click = 0
+  $('input').hide()
+  $('textarea').hide()
+  $('button').hide()
+  $('.view-title').on('click', (e) => {
+    e.preventDefault();
+    click++
+    console.log('youclickedme')
+    if (click % 2 !== 0) {
+      $('input').show()
+      $('textarea').show()
+      $('button').show()
+    } else {
+      $('input').hide()
+      $('textarea').hide()
+      $('button').hide()
+      $('#delete').show()
+    }
+
+
+  })
+</script>

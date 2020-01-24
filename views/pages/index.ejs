@@ -11,7 +11,7 @@
   <main>
     <section>
       <ul>
-        <li><%= result.length %> books</li>
+        <li id="book-amount"><%= result.length %> books</li>
         <% result.forEach(books => { %>
           <li class="books-item" data-id="<%= books.id %>">
             <h4>books: <%= books.title %></h4>
