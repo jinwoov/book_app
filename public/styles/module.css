@@ -16,6 +16,46 @@
 }
 
 .view-title {
-    text-align: none;
     width: 40%;
+    /* margin-left: 5%; */
+    margin-top: 5%;
 }
+
+.menu {
+    display: grid;
+    grid-template: 100% /50% 50%    
+}
+
+.menu li {
+    text-align: center;
+    padding: 5%;
+    background-color: black;
+}
+
+.menu a {
+    color: white;
+    font-family: 'Bangers', cursive;
+}
+
+#book-amount {
+    text-align: right;
+    padding: 2%;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    
+}
+
+li.books-item {
+    padding: 2%;
+}
+
+#delete {
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    background-color: #4a4a4a;
+    color: white;
+    font-family: 'Bangers', cursive;
+    width: 40%;
+    font-size: 15px;
+}
+

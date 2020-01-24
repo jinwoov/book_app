@@ -29,15 +29,23 @@ app.post('/books', addFavBook);
 app.get('/books/:book_id', getOneBook);
 app.get('/', getBooks);
 app.put('/update/:book_id', updateBook)
+app.delete('/delete/:book_id', deleteBook)
 
 function updateBook(request, response) {
   let { image, title, author, isbn, summary, bookshelf } = request.body;
   let SQL = `UPDATE bookApp SET author=$1, title=$2, isbn=$3, image_url=$4, descriptions=$5, bookshelf=$6 WHERE id=$7;`;
   let safeValue = [author, title, isbn, image, summary, bookshelf];
 
-  client.query(SQL, safeValue)
+  return client.query(SQL, safeValue)
     .then(response.redirect(`/books/${request.params.book_id}`))
     .catch(err => errorHandler(err, response));
+}
+
+function deleteBook(request, response) {
+  let SQL = 'DELETE FROM bookApp where id=$1;';
+  let values = [request.params.book_id];
+  return client.query(SQL,values)
+    .then(response.redirect('/'))
 }
 
 function bookSearch(request, response) {
@@ -100,8 +108,6 @@ function getOneBook(request,response) {
     })
 }
 
-
-
 function Book(bookData){
   let placeImage = 'https://via.placeholder.com/200';
   this.title = bookData.title || 'no title available';
@@ -116,7 +122,7 @@ function Book(bookData){
   if(bookData.categories.length > 1) {
     this.bookshelf = bookData.categories.join(', ');
   } else {
-    this.bookshelf = bookData.categories || 'no category is available';
+    this.bookshelf = bookData.categories[0] || 'no category is available';
   }
 }
 
@@ -129,7 +135,11 @@ function developerErrorHandler(request,response) {
 }
 
 
-
+function buttonRender() {
+  $('#book-amount').on('click', ()=> {
+  (console.log('hi'))
+  })
+}
 
 
 
