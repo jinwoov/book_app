@@ -12,7 +12,12 @@
 }
 
 #button {
-    margin: 10% 40% 0% 40%;
+    margin: 10px auto;
+    background-color: black;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:20px;
+    border-radius: 5%;
 }
 
 .view-title {
@@ -59,3 +64,109 @@ li.books-item {
     font-size: 15px;
 }
 
+
+h4 {
+    padding: 2%;
+}
+
+.book-container p{
+    padding: 10px;
+}
+
+#book-summary {
+    height: 100px;
+    overflow: scroll;
+    
+}
+
+.update-form textarea {
+    font-size:12px;
+    height: 50px;
+    overflow: scroll;
+}
+
+.update-form input {
+    font-size: 15px;
+    margin: auto;
+}
+
+.update-form button {
+    font-size: 20px;
+    margin: 5px auto;
+}
+
+.books-item h4 {
+    text-align: center;
+    font-family: 'DM Serif Text', serif;
+}
+
+.books-item {
+    text-align: center;
+}
+
+@media (min-width: 960px) {
+    body {
+        width: 100%;
+    }
+    header{
+        width: 100%;
+        background-image: url("../images/bookss.jpeg");
+    }
+    header h1 {
+        background-color: transparent;
+        text-align: center;
+    }
+    .menu li {
+        background-color: transparent;
+        font-size: 40px;
+    }
+
+    main h2 {
+        background-color:#bd1a1a;
+        color: white;
+    }
+
+    body main {
+        background-color: #e6cab3;
+        height: 100%;
+    }
+    body form {
+        margin-bottom: 0;
+    }
+
+    li img {
+        width: 30%;
+    }
+    
+    #delete {
+        margin-top: 10px;
+        background-color: red;
+    }
+
+    .view-title {
+        background-color: green;
+    }
+
+    .bookapp-item img {
+        margin-top: 20px;
+        width: 25%;
+    }
+
+    .bookapp-item img:hover {
+        width: 35%;
+    }
+
+    .bookapp-item h4 {
+        font-size: 30px;
+        font-family: 'DM Serif Text', serif;
+    }
+
+    .bookapp-item p {
+        width:80%;
+        margin: auto;
+        font-family: 'DM Serif Text', serif;
+        font-size: 25px;
+    }
+
+    
+}

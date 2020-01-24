@@ -12,11 +12,11 @@
         <section class="book container">
           <ul id="bookapp-list">
             <li class="bookapp-item" data-id="<%= oneBook.id %>">
-              <img src="<%= oneBook.image_url %>" alt="<%= oneBook.title %>" \>
+              <img src="<%= oneBook.image %>" alt="<%= oneBook.title %>" \>
               <h4>Book: <%= oneBook.title %></h4>
               <p>Author: <%= oneBook.author %></p>
               <p>ISBN: <%= oneBook.isbn %></p>
-              <p>Summary: <%= oneBook.descriptions %></p>
+              <p>Summary: <%= oneBook.summary %></p>
               <p><%= oneBook.bookshelf %></p>
             </li>
           </ul>
