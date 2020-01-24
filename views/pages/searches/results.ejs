@@ -14,14 +14,14 @@
     <% bookResultsData.forEach(value => { %>
       <li data-book-id="<%= value.isbn %>">
         <%- include('../books/detail', {oneBook: value})%>
-      <form action="/books"  method="post">
+      <form action="/books"  method="post" class="form-data">
         <input type='hidden' name="image" value="<%= value.image %>" />
         <input type='hidden' id='title' name="title" value="<%= value.title %>" required />
         <input type='hidden' id='author' name="author" value="<%= value.author %>" required />
         <input type='hidden' id='isbn' name="isbn" value="<%= value.isbn %>" />
         <input type='hidden' id='summary' name="summary" value="<%= value.summary %>" />
         <input type='hidden' id='bookshelf' name="bookshelf" value="<%= value.bookshelf %>" />
-        <button id='button' type='submit'>Add this book</button>
+        <button id='button' type='submit' id="add-fav">Add this book</button>
     </form>
       </li>
       <% })%>

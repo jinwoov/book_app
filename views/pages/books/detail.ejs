@@ -1,24 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <%- include('../layout/head') %>
-    <link rel="stylesheet" href="/styles/layout2.css">
-</head>
-<body>
 
-    <main>
-        <section class="book container">
+        <section class="book-container">
           <ul id="bookapp-list">
             <li class="bookapp-item" data-id="<%= oneBook.id %>">
+              <img src="<%= oneBook.image %>" alt="<%= oneBook.title %>" \>
               <h4>Book: <%= oneBook.title %></h4>
               <p>Author: <%= oneBook.author %></p>
               <p>ISBN: <%= oneBook.isbn %></p>
-              <img src="<%= oneBook.image %>" alt="<%= oneBook.title %>" \>
-              <p>Summary: <%= oneBook.summary %></p>
-              <p><%= oneBook.bookshelf %></p>
+              <p id="book-summary"><%= oneBook.summary %></p>
+              <p>Genre: <%= oneBook.bookshelf %></p>
             </li>
           </ul>
         </section>
-      </main>
-</body>
-</html>

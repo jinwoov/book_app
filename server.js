@@ -32,9 +32,10 @@ app.put('/update/:book_id', updateBook)
 app.delete('/delete/:book_id', deleteBook)
 
 function updateBook(request, response) {
+  let values = request.params.book_id;
   let { image, title, author, isbn, summary, bookshelf } = request.body;
-  let SQL = `UPDATE bookApp SET author=$1, title=$2, isbn=$3, image_url=$4, descriptions=$5, bookshelf=$6 WHERE id=$7;`;
-  let safeValue = [author, title, isbn, image, summary, bookshelf];
+  let SQL = `UPDATE bookApp SET author=$1, title=$2, isbn=$3, summary=$4, bookshelf=$5 WHERE id=$6;`;
+  let safeValue = [author, title, isbn, summary, bookshelf, values];
 
   return client.query(SQL, safeValue)
     .then(response.redirect(`/books/${request.params.book_id}`))
@@ -88,7 +89,7 @@ function addFavBook(request, response) {
 
   let {image, title, author, isbn, summary, bookshelf} = request.body;
 
-  let SQL = `INSERT INTO bookApp (author, title, isbn, image_url, descriptions, bookshelf) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;`;
+  let SQL = `INSERT INTO bookApp (author, title, isbn, image, summary, bookshelf) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;`;
   let safeValue = [author, title, isbn, image, summary, bookshelf];
   return client.query(SQL, safeValue)
     .then(result => {
@@ -133,17 +134,6 @@ function errorHandler(err, request, response) {
 function developerErrorHandler(request,response) {
   response.status(404).send ('sorry this request is not available yet')
 }
-
-
-function buttonRender() {
-  $('#book-amount').on('click', ()=> {
-  (console.log('hi'))
-  })
-}
-
-
-
-
 
 
 

@@ -27,13 +27,14 @@ main {
 }
 
 img {
-    margin: 20px;
+    margin: 10px;
+    width: 40%
 }
 
 img:hover {
-    width: 35%
+    width: 45%
 }
 
 li {
-    font-family: monospace,sans-serif;
+    font-family: Arial, Helvetica, sans-serif
 }
