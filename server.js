@@ -65,7 +65,6 @@ function bookResults(request, response) {
   let url = 'https://www.googleapis.com/books/v1/volumes?q=';
   if (bookResult[1] === 'title') {
     url += `+intitle:${bookResult[0]}`;
-
   } else {
     url += `+inauthor:${bookResult[0]}`;
   }
@@ -73,8 +72,7 @@ function bookResults(request, response) {
     .then(results => {
       let result = results.body.items;
       let bookLists= result.map(data => {
-        let bookList = new Book(data.volumeInfo)
-        return bookList
+        return new Book(data.volumeInfo)
       })
       response.status(200).render('./pages/searches/results', {bookResultsData: bookLists})
     })
@@ -102,7 +100,6 @@ function getOneBook(request,response) {
   let values = [request.params.book_id];
   client.query(SQL, values)
     .then(result => {
-      // console.log(result)
       response.render('./pages/books/show', { oneBook: result.rows[0]});
     }).catch(() => {
       errorHandler('Sorry, its invalid search',request ,response)
@@ -111,20 +108,12 @@ function getOneBook(request,response) {
 
 function Book(bookData){
   let placeImage = 'https://via.placeholder.com/200';
-  this.title = bookData.title || 'no title available';
-  if(bookData.authors > 1) {
-    this.author = bookData.authors.join(', ');
-  } else {
-    this.author = bookData.authors[0] || 'no author available';
-  }
-  this.summary = bookData.description || 'no summary available';
-  this.image = bookData.imageLinks.thumbnail || placeImage;
+  bookData.title !== undefined ? this.title = bookData.title : 'no title available';
+  bookData.authors !== undefined ? this.author = bookData.authors.toString(', ') : this.author = 'no author available'
+  bookData.description !== undefined ? this.summary = bookData.description : this.summary = 'no summary available';
+  bookData.imageLinks !== undefined ? this.image = bookData.imageLinks.thumbnail.replace('http:', 'https:') : this.image = placeImage;
   this.isbn = bookData.industryIdentifiers[0].identifier || 'no isbn available';
-  if(bookData.categories.length > 1) {
-    this.bookshelf = bookData.categories.join(', ');
-  } else {
-    this.bookshelf = bookData.categories[0] || 'no category is available';
-  }
+  bookData.bookshelf !== undefined ? this.bookshelf = bookData.categories.toString(', ') : this.bookshelf = 'no category is available';
 }
 
 function errorHandler(err, request, response) {
