@@ -13,14 +13,14 @@
   <form action="/searches/new" method="post">
     <%- include('../layout/h2') %>
     <input type="text" name="search" placeholder="Enter a title or author" required>
-    <fieldset>
+    <fieldset  class="index-card">
       <label for="title">
         <p>Title</p>
         <input type="radio" name="search" value="title" required \>
         </label>
       </fieldset>
-      <fieldset>
-        <label for="author">
+      <fieldset  class="index-card">
+        <label for="author" class="index-card">
           <p>Author</p>
           <input type="radio" name="search" value="author" required \>
         </label>
@@ -28,7 +28,5 @@
       <button type="submit">Search the Google Books API</button>
     </form>
   </main>
-    
 </body>
-
 </html>

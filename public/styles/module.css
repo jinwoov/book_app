@@ -79,23 +79,32 @@ h4 {
     
 }
 
+.update-form {
+    display: grid;
+}
+
 .update-form textarea {
     font-size:12px;
-    height: 50px;
+    height: 100px;
     overflow: scroll;
+    width: 60%;
+    margin: 1% auto;
 }
 
 .update-form input {
     font-size: 15px;
-    margin: auto;
+    margin: 1% auto;
 }
 
 .update-form button {
     font-size: 20px;
     margin: 5px auto;
+    background-color: black;
+    color: white;
 }
 
 .books-item h4 {
+    font-size: 20px;
     text-align: center;
     font-family: 'DM Serif Text', serif;
 }
@@ -104,10 +113,40 @@ h4 {
     text-align: center;
 }
 
+fieldset.index-card {
+    background-image: url("../images/desk.jpeg");
+}
+
+fieldset p {
+    font-size: 20px;
+    color: white;
+}
+
+footer p{
+    width: 100%;
+    text-align: center;
+    background-color: black;
+    color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 12px;
+    height: 3%;
+}
+
 @media (min-width: 960px) {
     body {
         width: 100%;
     }
+
+    html {
+        height:100%;
+        background-color: #e6cab3;
+
+    }
+
+    li#book-amount {
+        font-size: 25px;
+    }
+
     header{
         width: 100%;
         background-image: url("../images/bookss.jpeg");
@@ -168,5 +207,8 @@ h4 {
         font-size: 25px;
     }
 
+    html {
+
+    }
     
 }
