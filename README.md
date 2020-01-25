@@ -4,6 +4,7 @@ Full Stack application that helps with user's book search.
 # How to run this website
 Deployed Website: https://bd-jk-booklists.herokuapp.com/  
 Otherwise, run terminal and open root folder and run `psql -f data/book.sql`, then run `nodemon` to run the application locally.  
+Trello board: https://trello.com/b/888jV2QG/updated-book-shelves   
 
 # Created by  
 Jin Kim and Blandine Dasilveira
